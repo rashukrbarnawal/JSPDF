@@ -1,0 +1,134 @@
+doctype html
+html
+  head
+   
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js')
+    style.
+        .dontshow{
+          display:none;
+        }
+  body(style='background-image:url(images/t.jpg);background-size:cover ')
+    .container
+      table#example.table.table-bordered.table-striped.table-hover
+        thead
+          tr
+            th RollNo
+            th Name
+            th ValidTill
+            th College
+            th Department
+            th City
+            th Course
+            th Photo
+            th Action
+        
+        tbody
+          each member in data
+            tr
+              td #{member.rollno}
+              td #{member.name}
+              td #{member.validtill}
+              td #{member.college}
+              td #{member.department}
+              td #{member.city}
+              td #{member.course}
+              td
+                img(src="uploads/"+member.image,  style='height: 50px; width:50px ')
+              td
+                button.btn.btn-info(value=member.rollno).edit EDIT
+                button.btn.btn-danger(style="margin-left:20px;" value=member.name).remove REMOVE
+                button.btn.btn-info(style="margin-left:20px;" value=member.rollno).download DOWNLOAD
+      center.dontshow()
+        form(method='post',action='/update')
+          label OBJ_ID:
+          input#id(type="text", name="id")
+          br
+          br
+          label Valid Till :
+          input#validtill(type='date',name='validtill')
+          br
+          br
+          label Name:
+          input#name(type='text',name='name')
+          br
+          br
+          label Roll_No. :
+          input#rollno(type='text',name='rollno')
+          br
+          br
+          label College :
+          input#college(type='text',name='college')
+          br
+          br
+          label Department :
+          input#department(type='text', name='department')
+          br
+          br
+          label City:
+          input#city(type='text',name='city')
+          br
+          br
+          label Course:
+          input#course(type='text',name='course')
+          br
+          br
+          label Image:
+          input(type='file',name='photo')
+          br 
+          br
+          input(type='submit')
+      script.
+        $(".remove").click(function(){
+          var id= $(this).val();
+          alert(id);
+          $.post('/delete',{a:id},function(data){
+          alert('deleted successfully');
+          location.reload('/table');
+          });
+         });
+      script.
+        $(".edit").click(function(){
+          var id1= $(this).val();
+          alert(id1);
+          $.post('/edit',{b:id1},function(data){
+           
+            var a=JSON.stringify(data);
+            alert(a);
+            var b=JSON.parse(a);
+            
+            $("#id").val(b[0]._id)
+            $("#validtill").val(b[0].validtill)
+            $("#name").val(b[0].name)
+            $("#rollno").val(b[0].rollno)
+            $("#college").val(b[0].college)
+            $("#department").val(b[0].department)
+            $("#city").val(b[0].city)
+            $("#course").val(b[0].course)
+          });
+            $(".dontshow").show();//show
+          });
+          $(document).ready(function() {
+            $('#example').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+            });
+        });
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.1/jspdf.debug.js")
+    script(src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js") 
+    script(src='javascripts/index.js')
+    script(src='https://code.jquery.com/jquery-3.3.1.js')
+    script(src='https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js')
+    script(src='https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js')
+    script(src='https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js')
+    script(src='https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js')
+    script(src='https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js')
+    link(rel='stylesheet', type='text/css', href='https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css')
+    link(rel='stylesheet', type='text/css', href='https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css')
+    script(src="node_modules/image-to-base64/image-to-base64.min.js")

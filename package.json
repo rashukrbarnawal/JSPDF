@@ -1,0 +1,23 @@
+{
+  "name": "ocr",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "base64-img": "^1.0.4",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "filesystem": "^1.0.1",
+    "fs": "0.0.1-security",
+    "http-errors": "~1.6.3",
+    "i": "^0.3.6",
+    "image-to-base64": "^2.0.1",
+    "monk": "^7.1.2",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.2",
+    "pug": "^2.0.4"
+  }
+}
