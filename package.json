@@ -13,7 +13,7 @@
     "filesystem": "^1.0.1",
     "fs": "0.0.1-security",
     "http-errors": "~1.6.3",
-    "i": "^0.3.6",
+    "i": "^0.3.7",
     "image-to-base64": "^2.0.1",
     "monk": "^7.1.2",
     "morgan": "~1.9.1",
